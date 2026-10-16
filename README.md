@@ -37,6 +37,22 @@ Las comprobaciones usan el HTTP nativo (`CapacitorHttp`) para no depender del CO
 servidor. `CapacitorHttp` **no** reemplaza el `fetch` global: las webs remotas usan
 sus cookies de siempre.
 
+### Descargas, ventanas nuevas e impresión
+
+La web del servidor está pensada para un navegador; un WebView de Android no descarga
+ficheros, no abre pestañas ni imprime. `res/raw/printflow_shim.js` (inyectado en cada
+página por `WebFeatures.java`) lo resuelve para cualquier servidor, sin tocar la web:
+
+| En la web | En la app |
+| --- | --- |
+| Descargar (`<a download>`, `blob:`, adjuntos) | Se guarda en **Descargas** y se abre con el visor (PDF, CSV…) |
+| `window.open` / `target="_blank"` del propio servidor | Si es un fichero, igual que arriba; si es una página, se abre en la misma vista |
+| Enlaces a otras webs | Navegador del sistema (la app sigue en el ERP) |
+| `window.print()` | Diálogo de impresión de Android |
+
+Para probarlo en el emulador: `adb forward tcp:9333 localabstract:webview_devtools_remote_<pid>`
+y Chrome DevTools (`chrome://inspect`) sobre el WebView (APK debug).
+
 ## Integración con el servidor PrintFlow
 
 - User-Agent con `PrintFlowApp` → el servidor muestra en Ajustes la tarjeta "App móvil"
