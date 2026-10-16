@@ -25,6 +25,8 @@ const config: CapacitorConfig = {
     appendUserAgent: 'PrintFlowApp',
   },
   plugins: {
+    // Iconos claros en las barras del sistema (la app y la web son oscuras).
+    SystemBars: { style: 'DARK' },
     // No se sustituye fetch global: las webs remotas usan sus cookies normales.
     // La pantalla de servidores llama a CapacitorHttp directamente.
     CapacitorHttp: { enabled: false },

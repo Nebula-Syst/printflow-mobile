@@ -13,6 +13,8 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
+        <!-- Fondo oscuro de PrintFlow: es lo que se ve detrás de las barras del sistema -->
+        <item name="android:windowBackground">@color/printflow_bg</item>
     </style>
 
 
